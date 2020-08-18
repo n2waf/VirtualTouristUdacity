@@ -5,7 +5,17 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="PhotoEntity" representedClassName="PhotoEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="photoData" optional="YES" attributeType="Binary"/>
+    </entity>
+    <entity name="PinEntity" representedClassName="PinEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
     <elements>
         <element name="Annotations" positionX="-54" positionY="-9" width="128" height="88"/>
+        <element name="PhotoEntity" positionX="-27" positionY="45" width="128" height="58"/>
+        <element name="PinEntity" positionX="0" positionY="63" width="128" height="88"/>
     </elements>
 </model>

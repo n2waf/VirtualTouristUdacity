@@ -16,7 +16,7 @@ class ViewController: UIViewController , MKMapViewDelegate{
     @IBOutlet weak var mapView: MKMapView!
     var annotationArray = [MKPointAnnotation]()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var locations  = [Annotations]()
+    var locations  = [PinEntity]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +32,10 @@ class ViewController: UIViewController , MKMapViewDelegate{
     func fetchData() {
         
         let context = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Annotations")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PinEntity")
         do {
             let results = try context.fetch(fetchRequest)
-            locations = results as! [Annotations]
+            locations = results as! [PinEntity]
            
             addAnnotations(locations)
         } catch let error as NSError {
@@ -43,7 +43,7 @@ class ViewController: UIViewController , MKMapViewDelegate{
         }
     }
     
-    func addAnnotations(_ data:[Annotations]) {
+    func addAnnotations(_ data:[PinEntity]) {
         var desc = [MKPointAnnotation]()
         
         for i in data {
@@ -151,7 +151,7 @@ class ViewController: UIViewController , MKMapViewDelegate{
     
     func saveToCoreData(_ annotations : MKPointAnnotation) {
         let context = appDelegate.persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "Annotations", in: context)
+        let entity = NSEntityDescription.entity(forEntityName: "PinEntity", in: context)
         let newAnnotation = NSManagedObject(entity: entity!, insertInto: context)
         newAnnotation.setValue(annotations.coordinate.latitude, forKey: "latitude")
         newAnnotation.setValue(annotations.coordinate.longitude, forKey: "longitude")

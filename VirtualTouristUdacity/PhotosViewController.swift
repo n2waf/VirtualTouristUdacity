@@ -24,7 +24,9 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate , UIColle
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func Update(_ sender: Any) {
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         photosURL.count
     }
@@ -32,7 +34,8 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate , UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = PhotosCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PhotosCollectionViewCell
         let url = URL(string: photosURL[indexPath.row])
-        cell.Image.kf.setImage(with: url)
+        let image = UIImage(named: "placeholder")
+        cell.Image.kf.setImage(with: url , placeholder: image)
         return cell
     }
     

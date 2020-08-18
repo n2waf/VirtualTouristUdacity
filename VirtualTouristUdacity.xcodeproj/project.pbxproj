@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -111,7 +111,6 @@
 				EAE1372E36876793D49E457A /* Pods-VirtualTouristUdacity.debug.xcconfig */,
 				77458A0E17B8EE3F49E4CADA /* Pods-VirtualTouristUdacity.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
