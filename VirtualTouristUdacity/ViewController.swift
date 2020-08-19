@@ -86,9 +86,8 @@ class ViewController: UIViewController , MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             if let coordinate = view.annotation?.coordinate {
-               
                 var URLs = [String]()
-                APIClient.photosSearch(lat: coordinate.latitude, lon: coordinate.longitude, page: "\(Int.random(in: 1...6))") { (data, error) in
+                APIClient.photosSearch(lat: coordinate.latitude, lon: coordinate.longitude, page: "\(1)") { (data, error) in
                     guard let photos = data?.photos?.photo else {
                         return
                     }
@@ -99,9 +98,14 @@ class ViewController: UIViewController , MKMapViewDelegate{
                     }
  
                     DispatchQueue.main.async {
-                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PhotosShow") as! PhotosViewController
-                        vc.photosURL = URLs
-                        self.present(vc,animated: true)
+                     
+                        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PhotosShow") as? PhotosViewController
+                        vc!.photosURL = URLs
+                        vc!.coordinate = coordinate
+                        
+                        self.navigationController?.pushViewController(vc!, animated: true)
+                        
+                      //  self.present(vc,animated: true)
                     }
                     
                 }

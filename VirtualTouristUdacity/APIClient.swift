@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Kingfisher
 
 let apiKey = "ee1ab39a32ebb844138e825d30ba76cd"
 let SearchMethod = "flickr.photos.search"
@@ -18,7 +19,7 @@ enum EndPoints {
     var StringValue : String {
         switch self {
         case .searchPhotos(let lat,let lon, let page):
-            return "https://api.flickr.com/services/rest?api_key=\(apiKey)&method=\(SearchMethod)&lat=\(lat)&lon=\(lon)&format=json&per_page=\(page)0&accuracy=11&nojsoncallback=1"
+            return "https://api.flickr.com/services/rest?api_key=\(apiKey)&method=\(SearchMethod)&lat=\(lat)&lon=\(lon)&format=json&per_page=10&page=\(page)&accuracy=11&nojsoncallback=1"
         case .getPhotoURL(let farm , let server , let photoID , let secret):
             return "https://farm\(farm).staticflickr.com/\(server)/\(photoID)_\(secret)_b.jpg"
         }
@@ -30,6 +31,18 @@ enum EndPoints {
 
 class APIClient {
     
+    class func downloadImages(_ url : URL ,completion: @escaping (Data?,Error?) -> Void) {
+        KingfisherManager.shared.retrieveImage(with: url) { result in
+            do {
+                let img = try result.get().image.imageWithoutBaseline()
+                let imgData = img.jpegData(compressionQuality: 1)
+                completion(imgData , nil)
+            } catch {
+                completion(nil , error)
+            }
+            
+        }
+    }
     class func photosSearch(lat: Double , lon : Double , page : String,completion: @escaping (Flicker?,Error?) -> Void)  {
       
         let url = EndPoints.searchPhotos("\(lat)", "\(lon)", page).url
