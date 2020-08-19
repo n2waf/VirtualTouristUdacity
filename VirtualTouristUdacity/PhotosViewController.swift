@@ -24,6 +24,8 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate , UIColle
     var pinData : PinEntity?
     var page = 1
     
+   
+    
     var fetchedResultController: NSFetchedResultsController = NSFetchedResultsController<NSFetchRequestResult>()
     
     
