@@ -11,7 +11,7 @@ import MapKit
 import CoreLocation
 import CoreData
 
-class ViewController: UIViewController , MKMapViewDelegate{
+class MapViewController: UIViewController , MKMapViewDelegate{
     
     @IBOutlet weak var mapView: MKMapView!
     var annotationArray = [MKPointAnnotation]()
@@ -50,7 +50,7 @@ class ViewController: UIViewController , MKMapViewDelegate{
 
             let latitude = CLLocationDegrees(exactly: i.latitude)
             let longitude = CLLocationDegrees(exactly: i.longitude)
-          //  CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+         
             let coordinate = CLLocationCoordinate2D(latitude: latitude!, longitude: longitude!)
             
             let annotation = MKPointAnnotation()
@@ -99,11 +99,11 @@ class ViewController: UIViewController , MKMapViewDelegate{
  
                     DispatchQueue.main.async {
                      
-                        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PhotosShow") as? PhotosViewController
-                        vc!.photosURL = URLs
-                        vc!.coordinate = coordinate
+                        let secondViewController = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PhotosShow") as? PhotosViewController
+                        secondViewController!.photosURL = URLs
+                        secondViewController!.coordinate = coordinate
                         
-                        self.navigationController?.pushViewController(vc!, animated: true)
+                        self.navigationController?.pushViewController(secondViewController!, animated: true)
                         
                       //  self.present(vc,animated: true)
                     }

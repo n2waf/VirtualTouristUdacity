@@ -11,7 +11,7 @@ import MapKit
 import Kingfisher
 import CoreData
 
-class PhotosViewController: UIViewController, UICollectionViewDelegate , UICollectionViewDataSource,NSFetchedResultsControllerDelegate {
+class PhotosViewController: UIViewController {
 
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -35,13 +35,16 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate , UIColle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getData()
+        
         setAnnotation(coordinate!)
         fetchedResultController = getFetchedResultController()
         fetchedResultController.delegate = self
+        
         do {
             try self.fetchedResultController.performFetch()
-            
+            if self.fetchedResultController.fetchedObjects?.count == nil {
+                getData()
+            }
         } catch _ {
             }
         
@@ -51,9 +54,8 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate , UIColle
         activityIN.color = .label
         activityIN.startAnimating()
         self.view.addSubview(activityIN)
-        
         activityIN.stopAnimating()
-        // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func Update(_ sender: Any) {
@@ -99,29 +101,7 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate , UIColle
         }
         
     }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let numberOfRowsInSection = fetchedResultController.sections?[section].numberOfObjects
-        return numberOfRowsInSection!
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = PhotosCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PhotosCollectionViewCell
-        let img = fetchedResultController.object(at: indexPath as IndexPath) as! PhotoEntity
-        cell.Image.image = UIImage(data:img.photoData!)
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let managedObject:NSManagedObject = fetchedResultController.object(at: indexPath as IndexPath) as! NSManagedObject
-        managedObjectContext.delete(managedObject)
-        do {
-            try managedObjectContext.save()
-        } catch _ {
-        }
-    }
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        PhotosCollectionView.reloadData()
-    }
+
 
     func saveToCoreData(_ imgData: Data) {
         let entityDescripition = NSEntityDescription.entity(forEntityName: "PhotoEntity", in: managedObjectContext)
@@ -143,19 +123,6 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate , UIColle
             }
     }
     
-
-    func getFetchedResultController() -> NSFetchedResultsController<NSFetchRequestResult> {
-        fetchedResultController = NSFetchedResultsController(fetchRequest: taskFetchRequest(),  managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
-        return fetchedResultController
-    }
-    
-    func taskFetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PhotoEntity")
-        let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
-        fetchRequest.predicate = NSPredicate(format: "%K == %@ AND %K == %@", argumentArray:["toPin.latitude", Double(coordinate!.latitude), "toPin.longitude", Double(coordinate!.longitude)])
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        return fetchRequest
-    }
 
 
     func deleteObjcets() -> Void {
@@ -181,5 +148,51 @@ class PhotosViewController: UIViewController, UICollectionViewDelegate , UIColle
         
     }
 
+
+}
+
+// MARK: CollectionView
+extension PhotosViewController : UICollectionViewDelegate , UICollectionViewDataSource{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let numberOfRowsInSection = fetchedResultController.sections?[section].numberOfObjects
+        return numberOfRowsInSection!
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = PhotosCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! PhotosCollectionViewCell
+        let img = fetchedResultController.object(at: indexPath as IndexPath) as! PhotoEntity
+        cell.Image.image = UIImage(data:img.photoData!)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let managedObject:NSManagedObject = fetchedResultController.object(at: indexPath as IndexPath) as! NSManagedObject
+        managedObjectContext.delete(managedObject)
+        do {
+            try managedObjectContext.save()
+        } catch _ {
+        }
+    }
+}
+
+// MARK: NSFetchController
+extension PhotosViewController : NSFetchedResultsControllerDelegate{
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        PhotosCollectionView.reloadData()
+    }
+
+    func getFetchedResultController() -> NSFetchedResultsController<NSFetchRequestResult> {
+        fetchedResultController = NSFetchedResultsController(fetchRequest: taskFetchRequest(),  managedObjectContext: managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultController
+    }
+    
+    func taskFetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "PhotoEntity")
+        let sortDescriptor = NSSortDescriptor(key: "createdAt", ascending: true)
+        fetchRequest.predicate = NSPredicate(format: "%K == %@ AND %K == %@", argumentArray:["toPin.latitude", Double(coordinate!.latitude), "toPin.longitude", Double(coordinate!.longitude)])
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        return fetchRequest
+    }
 
 }

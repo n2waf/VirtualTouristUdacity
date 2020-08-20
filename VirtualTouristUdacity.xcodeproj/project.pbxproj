@@ -10,7 +10,7 @@
 		3A232863F3A26E9B761ABE28 /* Pods_VirtualTouristUdacity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F452F56B7DD9DC25D6EEBC /* Pods_VirtualTouristUdacity.framework */; };
 		BD0A22BB24EB0D1F0010C2B3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0A22BA24EB0D1F0010C2B3 /* AppDelegate.swift */; };
 		BD0A22BD24EB0D1F0010C2B3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0A22BC24EB0D1F0010C2B3 /* SceneDelegate.swift */; };
-		BD0A22BF24EB0D1F0010C2B3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0A22BE24EB0D1F0010C2B3 /* ViewController.swift */; };
+		BD0A22BF24EB0D1F0010C2B3 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD0A22BE24EB0D1F0010C2B3 /* MapViewController.swift */; };
 		BD0A22C224EB0D1F0010C2B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD0A22C024EB0D1F0010C2B3 /* Main.storyboard */; };
 		BD0A22C524EB0D1F0010C2B3 /* VirtualTouristUdacity.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BD0A22C324EB0D1F0010C2B3 /* VirtualTouristUdacity.xcdatamodeld */; };
 		BD0A22C724EB0D230010C2B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD0A22C624EB0D230010C2B3 /* Assets.xcassets */; };
@@ -27,7 +27,7 @@
 		BD0A22B724EB0D1F0010C2B3 /* VirtualTouristUdacity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VirtualTouristUdacity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD0A22BA24EB0D1F0010C2B3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD0A22BC24EB0D1F0010C2B3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BD0A22BE24EB0D1F0010C2B3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BD0A22BE24EB0D1F0010C2B3 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		BD0A22C124EB0D1F0010C2B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BD0A22C424EB0D1F0010C2B3 /* VirtualTouristUdacity.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VirtualTouristUdacity.xcdatamodel; sourceTree = "<group>"; };
 		BD0A22C624EB0D230010C2B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 				BD0A22D724EB28EA0010C2B3 /* Models */,
 				BD0A22BA24EB0D1F0010C2B3 /* AppDelegate.swift */,
 				BD0A22BC24EB0D1F0010C2B3 /* SceneDelegate.swift */,
-				BD0A22BE24EB0D1F0010C2B3 /* ViewController.swift */,
+				BD0A22BE24EB0D1F0010C2B3 /* MapViewController.swift */,
 				BD0A22C024EB0D1F0010C2B3 /* Main.storyboard */,
 				BD0A22C624EB0D230010C2B3 /* Assets.xcassets */,
 				BD0A22C824EB0D230010C2B3 /* LaunchScreen.storyboard */,
@@ -232,7 +232,7 @@
 				BD0A22D924EB29960010C2B3 /* Photos.swift in Sources */,
 				BD0A22DD24EB32FC0010C2B3 /* PhotosViewController.swift in Sources */,
 				BD0A22DB24EB323F0010C2B3 /* PhotosCollectionViewCell.swift in Sources */,
-				BD0A22BF24EB0D1F0010C2B3 /* ViewController.swift in Sources */,
+				BD0A22BF24EB0D1F0010C2B3 /* MapViewController.swift in Sources */,
 				BD0A22BB24EB0D1F0010C2B3 /* AppDelegate.swift in Sources */,
 				BD0A22C524EB0D1F0010C2B3 /* VirtualTouristUdacity.xcdatamodeld in Sources */,
 				BD0A22D624EB25930010C2B3 /* APIClient.swift in Sources */,
